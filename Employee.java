@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Employee {
     private int id;
     private String name;
@@ -6,20 +9,23 @@ public class Employee {
     private boolean isActive;
     private LocalDate birthDate;
 
+    // Default Constructor
     public Employee() {
     }
 
+    // Parameterized Constructor
     public Employee(int id, String name, String email, long mobile, boolean isActive, LocalDate birthDate) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.mobile = mobile;
         this.isActive = isActive;
-        this.birthDate = birthDate;
+        this.setBirthDate(birthDate); // Apply validation
     }
 
+    // Getters and Setters
     public int getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(int id) {
@@ -27,7 +33,7 @@ public class Employee {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
@@ -35,7 +41,7 @@ public class Employee {
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public void setEmail(String email) {
@@ -43,7 +49,7 @@ public class Employee {
     }
 
     public long getMobile() {
-        return this.mobile;
+        return mobile;
     }
 
     public void setMobile(long mobile) {
@@ -51,7 +57,7 @@ public class Employee {
     }
 
     public boolean isActive() {
-        return this.isActive;
+        return isActive;
     }
 
     public void setActive(boolean active) {
@@ -59,15 +65,29 @@ public class Employee {
     }
 
     public LocalDate getBirthDate() {
-        return this.birthDate;
+        return birthDate;
     }
 
     public void setBirthDate(LocalDate birthDate) {
+        if (birthDate != null && birthDate.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("Birth date cannot be in the future.");
+        }
         this.birthDate = birthDate;
     }
 
+    // toString with custom date formatting
+    @Override
     public String toString() {
-        int var10000 = this.id;
-        return "Employee{id=" + var10000 + ", name='" + this.name + "', email='" + this.email + "', mobile=" + this.mobile + ", isActive=" + this.isActive + ", birthDate=" + String.valueOf(this.birthDate) + "}";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+        String formattedDate = (birthDate != null) ? birthDate.format(formatter) : "N/A";
+
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", mobile=" + mobile +
+                ", isActive=" + isActive +
+                ", birthDate=" + formattedDate +
+                '}';
     }
 }
