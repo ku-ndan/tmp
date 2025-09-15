@@ -1,27 +1,41 @@
-]
-[REQUEST] GET http://localhost:8080/webjars/swagger-ui/index.html
-[CLIENT IP] 0:0:0:0:0:0:0:1
-[RESPONSE STATUS] 304
-[RESPONSE HEADER] Last-Modified: Fri, 12 Sep 2025 11:28:00 GMT
-[DURATION] 81ms
-[REQUEST] GET http://localhost:8080/v3/api-docs/swagger-config
-[CLIENT IP] 0:0:0:0:0:0:0:1
-[RESPONSE STATUS] 200
-[RESPONSE HEADER] Content-Type: application/json
-[RESPONSE HEADER] Content-Length: 166
-[DURATION] 128ms
-[REQUEST] GET http://localhost:8080/v3/api-docs
-[CLIENT IP] 0:0:0:0:0:0:0:1
-2025-09-15T22:21:41.401+05:30  WARN 15512 --- [ctor-http-nio-2] reactor.core.Exceptions                  : throwIfFatal detected a jvm fatal exception, which is thrown and logged below:
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.5.0</version>
 
-java.lang.NoSuchMethodError: 'void org.springframework.web.method.ControllerAdviceBean.<init>(java.lang.Object)'
-	at org.springdoc.core.service.GenericResponseService.lambda$getGenericMapResponse$8(GenericResponseService.java:700) ~[springdoc-openapi-starter-common-2.2.0.jar:2.2.0]
-	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:193) ~[na:na]
-	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:1024) ~[na:na]
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:556) ~[na:na]
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:546) ~[na:na]
-	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:622) ~[na:na]
-	at java.base/java.util.stream.AbstractPipeline.evaluateToArrayNode(AbstractPipeline.java:291) ~[na:na]
-	at java.base/java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:631) ~[na:na]
-	at java.base/java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:637) ~[na:na]
-	at java.base/java.util.stream.ReferencePipeline.toList(ReferencePipeline.java:642) ~[na:na]
+  </parent>
+  <properties>
+    <maven.compiler.source>22</maven.compiler.source>
+    <maven.compiler.target>22</maven.compiler.target>
+    <maven.compiler.release>22</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-r2dbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.200</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.r2dbc</groupId>
+      <artifactId>r2dbc-h2</artifactId>
+      <version>0.8.5.RELEASE</version>
+    </dependency>
+
+    <!-- Swagger/OpenAPI for WebFlux -->
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
+      <version>2.2.0</version> <!-- or latest compatible version -->
+    </dependency>
