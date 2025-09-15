@@ -6,12 +6,15 @@ spring.r2dbc.password=
 # === SQL initialization ===
 spring.sql.init.mode=never
 
+# === SpringDoc OpenAPI / Swagger UI ===
 springdoc.api-docs.path=/v3/api-docs
-springdoc.swagger-ui.enabled = true
+springdoc.swagger-ui.enabled=true
 springdoc.swagger-ui.path=/swagger-ui.html
-spring.webflux.static-path-pattern = /**
-#springdoc.override-with-generic-response: false
 
+# Important: fix spacing for static resources
+spring.webflux.static-path-pattern=/**
+
+#springdoc.override-with-generic-response=false
 
 # === H2 Console ===
 spring.h2.console.enabled=true
@@ -19,4 +22,3 @@ spring.h2.console.path=/h2-console
 
 # === Logging (Optional) ===
 logging.level.org.springframework.r2dbc=DEBUG
- 
